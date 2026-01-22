@@ -21,9 +21,19 @@ interface Props {
 }
 
 const builder = imageUrlBuilder(client);
+const FALLBACK_IMAGE =
+  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5Y2EzYWYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCI+Tm8gaW1hZ2U8L3RleHQ+PC9zdmc+";
 
 function ProjectCard({ project }: Props) {
   const [isHovering, setIsHovering] = useState(false);
+  const gifSrc = project.gif
+    ? builder.image(project.gif).url()
+    : FALLBACK_IMAGE;
+  const imageSrc = project.image
+    ? builder.image(project.image).url()
+    : FALLBACK_IMAGE;
+  const altText = project.image?.alt || project.title || "Project image";
+
   return (
     <Card
       key={project._id}
@@ -42,7 +52,7 @@ function ProjectCard({ project }: Props) {
       <CardContent>
         {isHovering ? (
           <Image
-            src={builder.image(project.gif).url()}
+            src={gifSrc}
             className="rounded-md max-w-full"
             alt="gif"
             width={200}
@@ -52,9 +62,9 @@ function ProjectCard({ project }: Props) {
           ></Image>
         ) : (
           <Image
-            src={builder.image(project.image).url()}
+            src={imageSrc}
             className="rounded-md max-w-full"
-            alt="site image"
+            alt={altText}
             width={400}
             height={200}
           />

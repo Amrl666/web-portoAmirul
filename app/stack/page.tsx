@@ -16,6 +16,8 @@ import { getAllTechnologies } from "@/sanity/lib/queries";
 import Footer from "@/components/shared/footer";
 
 const builder = imageUrlBuilder(client);
+const FALLBACK_IMAGE =
+  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5Y2EzYWYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCI+Tm8gaW1hZ2U8L3RleHQ+PC9zdmc+";
 
 function Stack() {
   const { data: technologies } = useSWR<Technology[]>(
@@ -37,12 +39,16 @@ function Stack() {
                   <div className="h-full w-[150px] md:w-[150px] lg:w-[100px]  basis-1/3  flex items-center justify-center border-r pr-4 border-zinc-200">
                     <Image
                       className="object-contain overflow-none max-w-[50px]"
-                      src={builder
-                        .image(t.image)
-                        .width(150)
-                        .format("png")
-                        .url()}
-                      alt={t?.image?.alt}
+                      src={
+                        t.image
+                          ? builder
+                              .image(t.image)
+                              .width(150)
+                              .format("png")
+                              .url()
+                          : FALLBACK_IMAGE
+                      }
+                      alt={t?.image?.alt || `${t.title} logo`}
                       width={150}
                       height={150}
                     />
@@ -51,7 +57,10 @@ function Stack() {
                     <CardTitle className="text-zinc-600 font-semibold">
                       {t.title}
                     </CardTitle>
-                    <CardDescription className="text-zinc-500 mt-1.5 text-sm leading-tight">
+                    <CardDescription
+                      className="text-zinc-500 mt-1.5 text-sm leading-tight break-words overflow-hidden"
+                      style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical" }}
+                    >
                       {t.description}
                     </CardDescription>
                   </div>

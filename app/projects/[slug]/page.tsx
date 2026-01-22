@@ -8,18 +8,25 @@ import { Badge } from "@/components/ui/badge";
 import ProjectStack from "@/components/projects/project-stack";
 import ImageSwiper from "@/components/projects/image-swiper";
 import ProjectCard from "@/components/projects/project-card";
+import { notFound } from "next/navigation";
 
 export const revalidate = 1; // revalidate at most every hour
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: { slug: string } | Promise<{ slug: string }>;
 }
 
 async function Projects({ params }: Props) {
-  const { slug } = params;
-  const project: Project = await fetcher(getProject, { slug });
+  const { slug } = await Promise.resolve(params);
+  if (!slug) {
+    return notFound();
+  }
+
+  const project: Project | null = await fetcher(getProject, { slug });
+  if (!project) {
+    return notFound();
+  }
+
   const otherProjects: Project[] = await fetcher(getOtherProjects, { slug });
 
   return (
