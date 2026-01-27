@@ -8,8 +8,8 @@ interface Props {
 
 function ExperienceTimeline({ experience }: Props) {
   return (
-    <div className="max-w-5xl mx-auto px-10">
-      <h2 className="text-zinc-800 leading-snug text-4xl text-center underline mb-5 font-semibold">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10">
+      <h2 className="text-zinc-800 leading-snug text-2xl sm:text-3xl md:text-4xl text-center underline mb-5 font-semibold">
         Experience
       </h2>
       <ol className="relative border-s border-zinc-200">

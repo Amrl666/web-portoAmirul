@@ -11,9 +11,12 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Home",
+  title: "Amirul | Home",
   description:
-    "Hi, I'm a Frontend Engineer with 2+ years of experience with a strong drive and dedication to building fast, reliable, and modern web applications with Next.js & Typescript. With a history of contributions to projects in both corporate and freelance capacities, I have developed strong collaboration and communication skills, along with an innovative and adaptable approach that allows me to perform well under pressure. I'm also always looking for new ways to learn and improve further following events and innovations in open-source space.",
+    "Hi, I'm an IT Enthusiast with a passion for learning and growing across all IT fields. With a strong drive and dedication to building fast, reliable, and modern applications, I continuously expand my skills and knowledge. With a history of contributions to projects in both corporate and freelance capacities, I have developed strong collaboration and communication skills, along with an innovative and adaptable approach that allows me to perform well under pressure. I'm always looking for new ways to learn and improve, exploring innovations in open-source space and beyond.",
+  icons: {
+    icon: "/logo A.ico",
+  },
 };
 
 export default function RootLayout({
@@ -38,11 +41,14 @@ export default function RootLayout({
       <body
         suppressHydrationWarning={true}
         className={cn(
-          "min-h-screen bg-background font-sans antialiased light",
+          "min-h-screen bg-gradient-to-br from-background via-background to-accent/5 font-sans antialiased light relative",
           fontSans.variable
         )}
       >
-        {children}
+        <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.05),rgba(255,255,255,0))] pointer-events-none" />
+        <div className="relative z-10">
+          {children}
+        </div>
         <Toaster />
       </body>
     </html>

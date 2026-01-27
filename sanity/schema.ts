@@ -8,6 +8,7 @@ import technology from './schemas/technology'
 import project from './schemas/project'
 import userInfo from './schemas/userInfo'
 import experience from './schemas/experience'
+import chat from './schemas/chat'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -19,5 +20,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     project,
     userInfo,
     experience,
+    chat,
   ]
 }

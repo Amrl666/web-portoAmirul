@@ -50,11 +50,11 @@ function Contact() {
   }
 
   return (
-    <div className="w-full min-h-page  bg-gradient-to-r from-rose-100 to-teal-100 pb-5">
+    <div className="w-full min-h-screen pb-5">
       <Navbar />
-      <div className="w-full h-full pt-20 min-h-screen">
-        <div className="max-w-2xl mx-3 md:mx-auto shadow-xl rounded-xl mt-10 p-5 gap-5 bg-zinc-50/90">
-          <h1 className="mb-5 text-2xl text-semibold">Contact Form</h1>
+      <div className="w-full h-full pt-20 min-h-screen px-4 sm:px-6">
+        <div className="max-w-2xl mx-auto shadow-2xl rounded-xl mt-10 p-4 sm:p-6 md:p-8 gap-5 bg-card/50 backdrop-blur-sm border border-border">
+          <h1 className="mb-5 text-2xl font-semibold">Contact Form</h1>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField

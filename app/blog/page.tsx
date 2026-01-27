@@ -5,14 +5,14 @@ import LatestPosts from '@/components/shared/latest-posts';
 import Footer from '@/components/shared/footer';
 
 function Blog() {
-    
+
 
   return (
-    <main className='w-full min-h-screen bg-zinc-100'>
-    <Navbar className='bg-zinc-100/60'/>
-    <LastPost/>
-    <LatestPosts />
-    <Footer/>
+    <main className='w-full min-h-screen'>
+      <Navbar />
+      <LastPost />
+      <LatestPosts />
+      <Footer />
     </main>
   )
 }

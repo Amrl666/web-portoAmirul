@@ -26,9 +26,6 @@ const FALLBACK_IMAGE =
 
 function ProjectCard({ project }: Props) {
   const [isHovering, setIsHovering] = useState(false);
-  const gifSrc = project.gif
-    ? builder.image(project.gif).url()
-    : FALLBACK_IMAGE;
   const imageSrc = project.image
     ? builder.image(project.image).url()
     : FALLBACK_IMAGE;
@@ -37,7 +34,7 @@ function ProjectCard({ project }: Props) {
   return (
     <Card
       key={project._id}
-      className="bg-zinc-100/50 backdrop-blur-md h-full"
+      className="bg-card backdrop-blur-md h-full"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
@@ -50,16 +47,16 @@ function ProjectCard({ project }: Props) {
         <CardDescription>{project.company}</CardDescription>
       </CardHeader>
       <CardContent>
-        {isHovering ? (
+        {isHovering && project.gif ? (
           <Image
-            src={gifSrc}
+            src={builder.image(project.gif).url()}
             className="rounded-md max-w-full"
-            alt="gif"
+            alt="project preview"
             width={200}
             height={200}
             unoptimized={true}
             layout={"responsive"}
-          ></Image>
+          />
         ) : (
           <Image
             src={imageSrc}
@@ -72,12 +69,12 @@ function ProjectCard({ project }: Props) {
       </CardContent>
       <CardFooter className="flex flex-col items-start gap-3">
         <CardDescription>{project.description}</CardDescription>
-        <Link
-          href={`/projects/${project?.slug.current}`}
-          className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-        >
-          Read More
-        </Link>
+          <Link
+            href={`/projects/${project?.slug.current}`}
+            className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+          >
+            Read More
+          </Link>
       </CardFooter>
     </Card>
   );

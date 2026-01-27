@@ -15,7 +15,7 @@ export default function Hero({ userInfo }: Props) {
 	console.log("userInfo", userInfo);
 	const [imgError, setImgError] = useState(false);
 	return (
-		<div className="mx-auto max-w-5xl pt-10 md:pt-32 pb-16">
+		<div className="mx-auto max-w-5xl px-4 sm:px-6 pt-10 md:pt-32 pb-16">
 			<div className="w-full grid grid-cols-1 grid-rows-2 md:grid-cols-[2fr_1fr] md:grid-rows-1 gap-x-5">
 				<div className="md:order-1 order-2">
 					<div className="flex justify-start items-center gap-4">
@@ -35,12 +35,12 @@ export default function Hero({ userInfo }: Props) {
 							)}
 						</div>
 					</div>
-					<p className="text-6xl leading-tight tracking-tighter">
+					<p className="text-4xl sm:text-5xl md:text-6xl leading-tight tracking-tighter">
 						{userInfo && `${userInfo?.name} ${userInfo?.surname}`}
 					</p>
 					<p className="text-zinc-600 mt-5">{userInfo && userInfo.summary}</p>
 
-					<div className="flex justify-center md:justify-start gap-3 mt-10">
+					<div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 mt-10">
 						<Link
 							href="/projects"
 							className={cn(
@@ -67,17 +67,17 @@ export default function Hero({ userInfo }: Props) {
 				<div className="md:order-2 order-1 pb-10 md:pb-0 flex justify-center sm:justify-start md:justify-end">
 					{!imgError ? (
 						<Image
-							src="/poto.webp"
+							src="/poto.png"
 							alt="Hero Photo"
-							className="rounded-xl w-full sm:w-auto"
+							className="rounded-xl w-full max-w-[400px] h-auto sm:w-auto"
 							width={400}
 							height={400}
 							priority
 							onError={() => setImgError(true)}
 						/>
 					) : (
-						<div className="rounded-xl overflow-hidden bg-gradient-to-br from-zinc-200 to-zinc-300 w-full sm:w-auto">
-							<div className="w-[400px] h-[400px] flex items-center justify-center">
+						<div className="rounded-xl overflow-hidden bg-gradient-to-br from-zinc-200 to-zinc-300 w-full max-w-[400px] sm:w-auto">
+							<div className="w-full aspect-square max-w-[400px] flex items-center justify-center">
 								<div className="text-center">
 									<div className="text-6xl mb-4">📷</div>
 									<p className="text-zinc-600">Hero Image</p>

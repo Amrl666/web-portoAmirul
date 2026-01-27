@@ -6,23 +6,23 @@ import { navItems } from "@/lib/navItems";
 
 function Footer() {
   return (
-    <footer className="bg-zinc-50/50 backdrop-blur-sm rounded-lg shadow m-4 z-10 mt-32">
+    <footer className="bg-card/50 backdrop-blur-sm rounded-lg shadow m-4 z-10 mt-32">
       <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
         <div className="flex justify-start items-center gap-7">
           <Link href="/" className="md:-m-1.5 p-1.5 ml-3">
             <span className="sr-only">amrl.</span>
-            <h1 className="text-2xl text-zinc-950">amrl.</h1>
+            <h1 className="text-2xl text-foreground">amrl.</h1>
           </Link>
         </div>
 
-        <ul className="flex flex-wrap items-center mt-3 text-sm text-zinc-600 sm:mt-0">
+        <ul className="flex flex-wrap items-center mt-3 text-sm text-muted-foreground sm:mt-0">
           {navItems.map((item) => (
             <li key={item.name}>
               <Link
                 href={item.href}
                 className={cn(
                   buttonVariants({ variant: "ghost" }),
-                  " md:me-6 text-zinc-600 hover:text-zinc-700 hover:bg-zinc-300/50"
+                  " md:me-6 text-muted-foreground hover:text-foreground hover:bg-accent "
                 )}
               >
                 {item.name}

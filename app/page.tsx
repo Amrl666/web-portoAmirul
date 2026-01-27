@@ -6,12 +6,15 @@ import useSWR from "swr";
 import { UserInfo } from "@/sanity/lib/types/userInfo";
 import {
   getExperienceInformation,
+  getAllTechnologies,
   getUserInfo,
 } from "@/sanity/lib/queries";
 import { fetcher } from "@/sanity/lib/client";
 import { Experience } from "@/sanity/lib/types/experience";
 import ExperienceTimeline from "@/components/home/experience-timeline";
 import Navbar from "@/components/shared/navbar";
+import { Technology } from "@/sanity/lib/types/technology";
+import TechnologyGrid from "@/components/home/technology-grid";
 
 export default function Home() {
   const {
@@ -26,9 +29,15 @@ export default function Home() {
     error: experienceError,
   } = useSWR<Experience[]>(getExperienceInformation, fetcher);
 
-  const isError = userInfoError || experienceError;
+  const {
+    data: technologies,
+    isLoading: technologiesLoading,
+    error: technologiesError,
+  } = useSWR<Technology[]>(getAllTechnologies, fetcher);
 
-  if (userInfoLoading || experienceLoading) {
+  const isError = userInfoError || experienceError || technologiesError;
+
+  if (userInfoLoading || experienceLoading || technologiesLoading) {
     return (
       <div
         role="status"
@@ -64,7 +73,7 @@ export default function Home() {
     );
   }
 
-  if (!userInfo || !experience) {
+  if (!userInfo || !experience || !technologies) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-3 bg-background text-foreground">
         <p className="text-lg font-semibold">Data belum tersedia.</p>
@@ -75,10 +84,10 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-white">
+      <div>
         <Navbar />
 
-        <div className="relative isolate px-6 pt-14 lg:px-8">
+        <div className="relative isolate px-4 sm:px-6 lg:px-8 pt-14">
           <div
             className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
             aria-hidden="true"
@@ -91,9 +100,10 @@ export default function Home() {
               }}
             />
           </div>
-          <main className="min-h-screen ">
+          <main className="min-h-screen">
             <Hero userInfo={userInfo} />
             <ExperienceTimeline experience={experience} />
+            <TechnologyGrid technologies={technologies} />
           </main>
           <div
             className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"

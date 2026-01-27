@@ -19,7 +19,7 @@ export default function LastPost() {
   return post ? (
     <div className="w-full h-fit mt-20">
       {post?.mainImage ? (
-        <div className="w-full h-[500px] relative">
+        <div className="w-full h-[250px] sm:h-[350px] md:h-[500px] relative">
           <Image
             className="object-cover object-center md:object-cover"
             src={builder.image(post.mainImage).width(1500).height(500).url()}
@@ -28,19 +28,19 @@ export default function LastPost() {
           />
         </div>
       ) : null}
-      <div className={`max-w-5xl px-5 lg:mx-auto ${urbanist.className} pt-10`}>
+      <div className={`max-w-5xl px-4 sm:px-6 lg:px-8 mx-auto ${urbanist.className} pt-10`}>
         <Badge variant="outline">{post?.category ?? "Latest Post"}</Badge>
-        <h3 className="font-[700] text-[36px] mt-1.5">
+        <h3 className="font-[700] text-2xl sm:text-3xl md:text-[36px] mt-1.5">
           {post?.title ?? "Untitled"}
         </h3>
-        <p className="text-[#939394] text-[20px] mb-5">{post?.description}</p>
+        <p className="text-muted-foreground text-lg sm:text-[20px] mb-5">{post?.description}</p>
         <Link
           href={`/blog/${post?.slug.current}`}
           className={cn(buttonVariants({ variant: "outline" }))}
         >
           Read More
         </Link>
-        <div className="mt-10 border-b border-[#D0D5DD]"></div>
+        <div className="mt-10 border-b border-border"></div>
       </div>
     </div>
   ) : null;
