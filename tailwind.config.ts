@@ -4,6 +4,7 @@ import typography from '@tailwindcss/typography';
 import bgPatterns from 'tailwindcss-bg-patterns';
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',

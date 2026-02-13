@@ -29,12 +29,12 @@ async function BlogPosts({params}: Props) {
 
     
   return (
-    <div className={`min-h-screen bg-zinc-200 antialiased`}>
+    <div className={`min-h-screen antialiased`}>
         <Navbar/>
         <div className={`w-full ${urbanist.className}`}>
             <div className='relative flex items-end pb-28 justify-center w-full h-[80vh] mt-20 z-10'>
            
-            <div className="bg-zinc-600/50 p-10 border-zinc-300 text-zinc-50 bg-blend-lighten border  backdrop-blur-sm  max-w-6xl rounded-md z-10 mx-1.5">
+            <div className="bg-primary/80 p-10 border border-border text-primary-foreground bg-blend-lighten backdrop-blur-sm max-w-6xl rounded-md z-10 mx-1.5">
                 <h1 className='text-4xl sm:text-5xl md:text-5xl font-semibold '>
                     {post && post.title}
                 </h1>
@@ -52,18 +52,16 @@ async function BlogPosts({params}: Props) {
             />
             </div>
             <div className='w-full relative mb-10'>
-                <div className='fixed top-0 pattern-isometric pattern-zinc-400 pattern-bg-zinc-50 pattern-size-10 pattern-opacity-80 w-full h-full '>
+                <div className='fixed top-0 pattern-isometric pattern-border pattern-bg-muted pattern-size-10 pattern-opacity-20 w-full h-full '></div>
                 </div>
-            <article className={`p-5 my-10 px-10 pt-15 mx-auto z-10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border-zinc-400 border  prose prose-md md:prose-lg max-w-6xl pb-10 pt-10 bg-white/60 backdrop-blur-md backdrop-brightness-120 text-zinc-950 relative rounded-xl`}>
+            <article className={`p-5 my-10 px-10 pt-15 mx-auto z-10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-border prose prose-md md:prose-lg max-w-6xl pb-10 pt-10 bg-card/60 backdrop-blur-md text-foreground relative rounded-xl dark:prose-invert`}>
                 {post?.body ? <PortableText value={post.body} /> : null}
             </article>
 
-            <div className='bg-zinc-50/50 backdrop-blur-sm relative pb-10 max-w-6xl rounded-md border border-zinc-400 mx-auto'>
+            <div className='bg-card/50 backdrop-blur-sm relative pb-10 max-w-6xl rounded-md border border-border mx-auto'>
                 <LatestPostsHorizontal slug={slug}  />
             </div>
             
-            </div>
-
         </div>
         <Footer/>
     </div>

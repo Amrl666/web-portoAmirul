@@ -29,7 +29,7 @@ function LatestPostsHorizontal({ slug }: Props) {
   );
   return (
     <>
-      <h2 className="text-zinc-800 leading-snug text-4xl text-center underline mb-5 font-semibold mt-10">
+      <h2 className="text-foreground leading-snug text-4xl text-center underline mb-5 font-semibold mt-10">
         Latest Posts
       </h2>
       <div className="mt-10 flex flex-col max-w-4xl gap-5 justify-center mx-5 lg:mx-auto">
@@ -37,10 +37,10 @@ function LatestPostsHorizontal({ slug }: Props) {
           posts?.map((post) => (
             <Card
               key={post._id}
-              className=" backdrop-blur-md bg-zinc-50 h-[400px] sm:h-[200px] md:h-[150px]"
+              className="backdrop-blur-md bg-card h-[400px] sm:h-[200px] md:h-[150px]"
             >
               <CardContent className="grid grid-rows-2 gap-y-5 grid-cols-1 sm:grid-rows-1 sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr_3fr]  h-full p-5">
-                <div className="h-full w-full  flex items-center justify-center sm:border-r md:pr-4 border-zinc-200">
+                <div className="h-full w-full  flex items-center justify-center sm:border-r md:pr-4 border-border">
                   <Image
                     className="object-cover obect-center overflow-none max-w-full max-h-full rounded-md mx-auto"
                     src={builder
@@ -55,11 +55,11 @@ function LatestPostsHorizontal({ slug }: Props) {
                 </div>
                 <div className="ml-4">
                   <Link href={`/blog/${post?.slug.current}`}>
-                    <CardTitle className="text-zinc-600 font-semibold text-lg leading-tight hover:underline hover:cursor">
+                    <CardTitle className="text-foreground font-semibold text-lg leading-tight hover:underline hover:cursor">
                       {post.title}
                     </CardTitle>
                   </Link>
-                  <CardDescription className="text-zinc-500 mt-1.5 text-sm leading-tight">
+                  <CardDescription className="text-muted-foreground mt-1.5 text-sm leading-tight">
                     {post.description}
                   </CardDescription>
                   <Link

@@ -28,6 +28,7 @@ export function Guestbook({ initialMessages }: GuestbookProps) {
   const [adminKey, setAdminKey] = useState('');
   const [showAdminInput, setShowAdminInput] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,8 +39,11 @@ export function Guestbook({ initialMessages }: GuestbookProps) {
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [optimisticMessages]);
+    // Only scroll to bottom if user has submitted a message
+    if (hasSubmitted) {
+      scrollToBottom();
+    }
+  }, [optimisticMessages, hasSubmitted]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -56,6 +60,7 @@ export function Guestbook({ initialMessages }: GuestbookProps) {
     formRef.current?.reset();
     setMessageLength(0);
     inputRef.current?.focus();
+    setHasSubmitted(true);
 
     startTransition(async () => {
       // Add optimistic message within transition

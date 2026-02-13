@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 function ProjectsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full min-h-screen bg-background">{children}</div>
+    <div className="w-full min-h-screen">{children}</div>
   );
 }
 

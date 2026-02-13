@@ -26,7 +26,7 @@ function Stack() {
     fetcher
   );
   return (
-    <div className="w-full min-h-screen h-full pb-5 bg-background px-4 sm:px-6">
+    <div className="w-full min-h-screen h-full pb-5 px-4 sm:px-6">
       <Navbar />
       <div className="w-full h-full pt-28">
         {technologies && (

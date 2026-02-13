@@ -34,7 +34,7 @@ async function Projects({ params }: Props) {
   const otherProjects: Project[] = await fetcher(getOtherProjects, { slug });
 
   return (
-    <div className="w-full min-h-screen bg-background flex flex-col">
+    <div className="w-full min-h-screen flex flex-col">
       <Navbar />
       <div className="w-full h-full pt-20 pb-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto bg-card text-foreground shadow-xl rounded-xl mt-10 p-5 sm:p-6 gap-5 border border-border relative">

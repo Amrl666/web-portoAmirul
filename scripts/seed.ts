@@ -13,14 +13,14 @@ const client = createClient({
   useCdn: false,
 })
 
-console.log('🔧 Configuration:')
+console.log('Configuration:')
 console.log('   Project ID:', process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'NOT FOUND')
 console.log('   Dataset:', process.env.NEXT_PUBLIC_SANITY_DATASET || 'NOT FOUND')
-console.log('   Token:', process.env.SANITY_API_SEEDER ? '✓ Loaded' : '✗ NOT FOUND')
+console.log('   Token:', process.env.SANITY_API_SEEDER ? 'Loaded' : 'NOT FOUND')
 console.log('')
 
 if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || !process.env.SANITY_API_SEEDER) {
-  console.error('❌ Error: Missing  required environment variables')
+  console.error('Error: Missing  required environment variables')
   console.error('   Make sure .env.local contains:')
   console.error('   - NEXT_PUBLIC_SANITY_PROJECT_ID')
   console.error('   - SANITY_API_SEEDER')
@@ -29,10 +29,10 @@ if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || !process.env.SANITY_API_SEEDER
 
 async function seed() {
   try {
-    console.log('🌱 Starting seeding process...\n')
+    console.log('Starting seeding process...\n')
 
     // 1. Create Author
-    console.log('📝 Creating author...')
+    console.log('Creating author...')
     const author = await client.create({
       _type: 'author',
       name: 'Amirul Mabruri',
@@ -57,10 +57,10 @@ async function seed() {
         },
       ],
     })
-    console.log('✅ Author created:', author.name)
+    console.log('Author created:', author.name)
 
     // 2. Create Categories
-    console.log('\n📝 Creating categories...')
+    console.log('\nCreating categories...')
     const categoryWeb = await client.create({
       _type: 'category',
       title: 'Web Development',
@@ -71,38 +71,38 @@ async function seed() {
       title: 'JavaScript',
       description: 'Tips and tricks about JavaScript and TypeScript',
     })
-    console.log('✅ Categories created')
+    console.log('Categories created')
 
     // 3. Create Technologies
-    console.log('\n📝 Creating technologies...')
+    console.log('\nCreating technologies...')
     const techReact = await client.create({
       _type: 'technology',
       name: 'React',
-      icon: '⚛️',
+      icon: '',
       category: 'Frontend Framework',
     })
     const techNext = await client.create({
       _type: 'technology',
       name: 'Next.js',
-      icon: '▲',
+      icon: '',
       category: 'Frontend Framework',
     })
     const techTS = await client.create({
       _type: 'technology',
       name: 'TypeScript',
-      icon: '📘',
+      icon: '',
       category: 'Programming Language',
     })
     const techTailwind = await client.create({
       _type: 'technology',
       name: 'Tailwind CSS',
-      icon: '🎨',
+      icon: '',
       category: 'CSS Framework',
     })
-    console.log('✅ Technologies created')
+    console.log('Technologies created')
 
     // 4. Create UserInfo
-    console.log('\n📝 Creating user info...')
+    console.log('\nCreating user info...')
     void await client.create({
       _type: 'userInfo',
       name: 'Amirul',
@@ -112,10 +112,10 @@ async function seed() {
       githubUrl: 'https://github.com/amiruldev20',
       linkedInUrl: 'https://linkedin.com/in/amirulmabruri',
     })
-    console.log('✅ User info created')
+    console.log('User info created')
 
     // 5. Create Experience
-    console.log('\n📝 Creating experience entries...')
+    console.log('\nCreating experience entries...')
     await client.create({
       _type: 'experience',
       company: 'Tech Startup Indonesia',
@@ -132,10 +132,10 @@ async function seed() {
       startDate: '2021-06-01',
       summary: 'Mengembangkan berbagai proyek web untuk klien lokal dan internasional. Menangani full-stack development dari frontend hingga backend.',
     })
-    console.log('✅ Experience entries created')
+    console.log('Experience entries created')
 
     // 6. Create Projects
-    console.log('\n📝 Creating projects...')
+    console.log('\nCreating projects...')
     await client.create({
       _type: 'project',
       name: 'E-Commerce Platform',
@@ -206,10 +206,10 @@ async function seed() {
       featured: true,
       completedAt: '2024-11-15',
     })
-    console.log('✅ Projects created')
+    console.log('Projects created')
 
     // 7. Create Blog Posts
-    console.log('\n📝 Creating blog posts...')
+    console.log('\nCreating blog posts...')
     await client.create({
       _type: 'post',
       title: 'Getting Started with Next.js 14',
@@ -330,10 +330,10 @@ async function seed() {
         },
       ],
     })
-    console.log('✅ Blog posts created')
+    console.log('Blog posts created')
 
-    console.log('\n✨ Seeding completed successfully!')
-    console.log('\n📊 Summary:')
+    console.log('\nSeeding completed successfully!')
+    console.log('\nSummary:')
     console.log('   - 1 Author')
     console.log('   - 2 Categories')
     console.log('   - 4 Technologies')
@@ -341,9 +341,9 @@ async function seed() {
     console.log('   - 2 Experience entries')
     console.log('   - 2 Projects')
     console.log('   - 2 Blog posts')
-    console.log('\n🎉 Data seeded successfully!')
+    console.log('\nData seeded successfully!')
   } catch (error) {
-    console.error('❌ Error seeding data:', error)
+    console.error('Error seeding data:', error)
     process.exit(1)
   }
 }

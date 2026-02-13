@@ -4,6 +4,9 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Head from "next/head";
 import { Toaster } from "@/components/ui/toaster";
+import { Providers } from "./providers";
+import GalaxyBackground from "@/components/shared/galaxy-background/index";
+import AnimatedCursor from "@/components/ui/animated-cursor";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -41,15 +44,28 @@ export default function RootLayout({
       <body
         suppressHydrationWarning={true}
         className={cn(
-          "min-h-screen bg-gradient-to-br from-background via-background to-accent/5 font-sans antialiased light relative",
+          "min-h-screen font-sans antialiased relative",
           fontSans.variable
         )}
       >
-        <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.05),rgba(255,255,255,0))] pointer-events-none" />
-        <div className="relative z-10">
-          {children}
-        </div>
-        <Toaster />
+        <Providers>
+          <GalaxyBackground 
+            className="fixed inset-0 -z-10"
+            density={3.5}
+            glowIntensity={0.22}
+            speed={0.8}
+            starSpeed={0.2}
+            rotationSpeed={0.02}
+            mouseRepulsion={false}
+            repulsionStrength={3}
+            mouseInteraction={true}
+          />
+          <AnimatedCursor />
+          <div className="relative z-10">
+            {children}
+          </div>
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );

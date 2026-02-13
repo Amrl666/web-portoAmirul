@@ -6,23 +6,26 @@ import { navItems } from "@/lib/navItems";
 
 function Footer() {
   return (
-    <footer className="bg-card/50 backdrop-blur-sm rounded-lg shadow m-4 z-10 mt-32">
-      <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-        <div className="flex justify-start items-center gap-7">
-          <Link href="/" className="md:-m-1.5 p-1.5 ml-3">
-            <span className="sr-only">amrl.</span>
-            <h1 className="text-2xl text-foreground">amrl.</h1>
+    <footer className="mt-20 mb-4 px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-5xl rounded-2xl bg-card/30 border border-border/40 backdrop-blur-xl shadow-sm p-6 md:flex md:items-center md:justify-between transition-all hover:bg-card/50 hover:shadow-md">
+        <div className="flex justify-center md:justify-start items-center gap-4 mb-4 md:mb-0">
+          <Link href="/" className="group flex items-center gap-2">
+            <span className="font-bold text-xl tracking-tighter group-hover:text-primary transition-colors">amrl.</span>
           </Link>
+          <span className="hidden md:inline-block h-4 w-[1px] bg-border/60"></span>
+          <p className="text-sm text-muted-foreground">
+            &copy; {new Date().getFullYear()} All rights reserved.
+          </p>
         </div>
 
-        <ul className="flex flex-wrap items-center mt-3 text-sm text-muted-foreground sm:mt-0">
+        <ul className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
           {navItems.map((item) => (
             <li key={item.name}>
               <Link
                 href={item.href}
                 className={cn(
-                  buttonVariants({ variant: "ghost" }),
-                  " md:me-6 text-muted-foreground hover:text-foreground hover:bg-accent "
+                  buttonVariants({ variant: "ghost", size: "sm" }),
+                  "text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-all font-medium h-8"
                 )}
               >
                 {item.name}
@@ -36,3 +39,4 @@ function Footer() {
 }
 
 export default Footer;
+
