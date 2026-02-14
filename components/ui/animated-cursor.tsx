@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 
 const AnimatedCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const trailRef = useRef<HTMLDivElement>(null);
+  const lastPosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     // Check if window is defined (client-side)
@@ -16,6 +18,7 @@ const AnimatedCursor = () => {
     if (!cursor) return;
 
     let isVisible = false;
+    let isOnLink = false;
 
     const onMouseMove = (e: MouseEvent) => {
       if (!isVisible) {
@@ -24,6 +27,24 @@ const AnimatedCursor = () => {
       }
       // Directly manipulating style for performance
       cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+
+      // Create trail effect
+      const distance = Math.hypot(
+        e.clientX - lastPosRef.current.x,
+        e.clientY - lastPosRef.current.y
+      );
+      if (distance > 5 && isOnLink) {
+        const trail = document.createElement("div");
+        trail.className =
+          "pointer-events-none fixed w-2 h-2 rounded-full bg-cyan-400/30 blur-sm";
+        trail.style.left = e.clientX + "px";
+        trail.style.top = e.clientY + "px";
+        trail.style.transform = "translate(-50%, -50%)";
+        document.body.appendChild(trail);
+
+        setTimeout(() => trail.remove(), 300);
+        lastPosRef.current = { x: e.clientX, y: e.clientY };
+      }
     };
 
     const onMouseDown = () => {
@@ -48,17 +69,21 @@ const AnimatedCursor = () => {
     // Interactive elements logic with MutationObserver for dynamic elements
     const attachHoverListeners = () => {
       const handleLinkHover = () => {
+        isOnLink = true;
         cursor.style.width = "48px";
         cursor.style.height = "48px";
         cursor.style.backgroundColor = "hsl(var(--primary) / 0.5)";
         cursor.style.mixBlendMode = "normal";
+        cursor.style.boxShadow = "0 0 20px hsl(var(--primary) / 0.6)";
       };
       
       const handleLinkLeave = () => {
+        isOnLink = false;
         cursor.style.width = "32px";
         cursor.style.height = "32px";
         cursor.style.backgroundColor = "hsl(var(--primary) / 0.3)";
         cursor.style.mixBlendMode = "";
+        cursor.style.boxShadow = "";
       };
 
       const interactiveElements = document.querySelectorAll("a, button, input, textarea, [role='button']");

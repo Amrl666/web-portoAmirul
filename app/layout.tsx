@@ -52,8 +52,8 @@ export default function RootLayout({
           <GalaxyBackground 
             className="fixed inset-0 -z-10"
             density={3.5}
-            glowIntensity={0.22}
-            speed={0.8}
+            glowIntensity={0.12}
+            speed={0.6}
             starSpeed={0.2}
             rotationSpeed={0.02}
             mouseRepulsion={false}

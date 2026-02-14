@@ -15,6 +15,7 @@ import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface Props {
   project: Project;
@@ -32,12 +33,18 @@ function ProjectCard({ project }: Props) {
   const altText = project.image?.alt || project.title || "Project image";
 
   return (
-    <Card
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.5, type: "spring", stiffness: 300, damping: 30 }}
       key={project._id}
-      className="bg-card/50 backdrop-blur-sm h-full transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:border-primary/50 group overflow-hidden border-muted"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
     >
+      <Card
+        className="bg-card/50 backdrop-blur-sm h-full transition-all duration-500 hover:shadow-2xl hover:border-primary/50 group overflow-hidden border-muted"
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
       <CardHeader>
         <CardTitle className="text-xl font-bold tracking-tight">
           <Link href={project.url} target="_blank" className="hover:text-primary transition-colors flex items-center gap-2">
@@ -48,25 +55,33 @@ function ProjectCard({ project }: Props) {
       </CardHeader>
       <CardContent>
         <div className="overflow-hidden rounded-md border border-muted relative aspect-video">
-        {isHovering && project.gif ? (
-          <Image
-            src={builder.image(project.gif).url()}
-            className="rounded-md max-w-full"
-            alt="project preview"
-            width={200}
-            height={200}
-            unoptimized={true}
-            layout={"responsive"}
-          />
-        ) : (
-          <Image
-            src={imageSrc}
-            className="rounded-md max-w-full"
-            alt={altText}
-            width={400}
-            height={200}
-          />
-        )}
+          <motion.div
+            key={isHovering ? "gif" : "image"}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {isHovering && project.gif ? (
+              <Image
+                src={builder.image(project.gif).url()}
+                className="rounded-md max-w-full"
+                alt="project preview"
+                width={200}
+                height={200}
+                unoptimized={true}
+                layout={"responsive"}
+              />
+            ) : (
+              <Image
+                src={imageSrc}
+                className="rounded-md max-w-full"
+                alt={altText}
+                width={400}
+                height={200}
+              />
+            )}
+          </motion.div>
       </div>
       </CardContent>
       <CardFooter className="flex flex-col items-start gap-3">
@@ -79,6 +94,7 @@ function ProjectCard({ project }: Props) {
           </Link>
       </CardFooter>
     </Card>
+    </motion.div>
   );
 }
 
